@@ -1,0 +1,26 @@
+---
+/**
+ * BaseLayout.astro
+ * Provides the base HTML structure, global metadata, and global style imports for the app.
+ * This layout is used by the Home Screen page to integrate refactored HTML/CSS/JS.
+ */
+const { title = "Personal Notes Organizer", description = "Create, edit, and organize personal notes." } = Astro.props;
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/home.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <ThemeToggle />
+    <slot />
+  </body>
+</html>
