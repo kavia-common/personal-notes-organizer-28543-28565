@@ -1,20 +1,20 @@
 :root {
-  /* Dark theme baseline (Figma) */
-  --bg-canvas: #252525;
-  --text-primary: #F5F5F7;
-  --text-secondary: #C8C8CC;
+  /* Figma-accurate dark theme tokens */
+  --bg-canvas: #252525;        /* Canvas */
+  --text-primary: #F5F5F7;     /* Primary text */
+  --text-secondary: #C8C8CC;   /* Secondary text */
 
-  /* Stepped gray surfaces for cards */
-  --surface-1: #2A2A2A;
-  --surface-2: #292929;
-  --surface-3: #2C2C2C;
-  --surface-4: #2B2B2B;
-  --surface-5: #2D2D2D;
+  /* Card surface variants mapped 1:1 to Figma styles */
+  --surface-1: #2A2A2A; /* style_1 */
+  --surface-2: #292929; /* style_3 */
+  --surface-3: #2C2C2C; /* style_4 */
+  --surface-4: #2B2B2B; /* style_7 */
+  --surface-5: #2D2D2D; /* style_8 */
 
-  /* Header icon button surface */
+  /* Header icon button surface (style_6) */
   --btn-surface: #2E2E2E;
 
-  /* Accent + contrast */
+  /* FAB accent (style_39) + icon contrast */
   --accent: #3A86FF;
   --icon-on-accent: #FFFFFF;
 
@@ -26,22 +26,21 @@
   --focus-ring: rgba(58,134,255,0.9);
 
   /* Layout */
-  --container-max: 414px;  /* mobile-first baseline */
-  --gutter-x: 24px;        /* side padding per Figma */
-  --space-y: 14px;         /* vertical gap between cards */
+  --container-max: 414px;
+  --gutter-x: 24px;
+  --space-y: 14px;
 
   /* Typography */
   --font-family: "Helvetica Neue", Arial, sans-serif;
   --h1-size: 28px;
   --h1-line: 34px;
   --h1-weight: 700;
-
   --card-title-size: 18px;
   --card-title-line: 24px;
   --card-title-weight: 600;
 
   /* Radii */
-  --radius-card: 16px;   /* Figma rounded corners */
+  --radius-card: 16px;
   --radius-pill: 9999px;
 }
 
@@ -102,20 +101,35 @@ html, body {
   height: 50px;
   border-radius: var(--radius-pill);
   background: var(--btn-surface);
-  color: var(--text-primary);
+  color: var(--text-primary); /* Icons inherit currentColor */
   border: 1px solid var(--border-muted);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.12s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.12s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 .icon-btn .icon {
   width: 24px;
   height: 24px;
+  fill: currentColor; /* Ensure SVG fills match text/icon color */
+}
+/* Ensure any .icon inherits color by default */
+.icon {
+  fill: currentColor;
+  color: inherit;
+}
+/* Ensure any .icon inherits color by default */
+.icon {
+  fill: currentColor;
+  color: inherit;
 }
 .icon-btn:hover {
-  background: #343434;
+  background: #343434; /* ~+4% lighten from #2E2E2E */
   border-color: #474747;
 }
 .icon-btn:active {
@@ -140,7 +154,7 @@ html, body {
 
 /* Card styles */
 .card {
-  background: var(--surface-2);
+  background: var(--surface-2); /* default surface */
   border-radius: var(--radius-card);
   padding: 16px;
   border: 1px solid var(--border-muted);
@@ -169,9 +183,15 @@ html, body {
   letter-spacing: 0;
 }
 
+/* Optional secondary text style (for future use) */
+.card__subtitle,
+.card__meta {
+  color: var(--text-secondary);
+}
+
 .card:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  border-color: #444;
+  border-color: #444444;
   cursor: pointer;
 }
 .card:active {
@@ -190,25 +210,32 @@ html, body {
   right: 20px;
   bottom: 20px;
   border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: var(--icon-on-accent);
+  background: var(--accent);           /* Figma accent */
+  color: var(--icon-on-accent);        /* White icon */
   border: none;
   box-shadow: var(--shadow-strong);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    background-color 0.2s ease;
 }
 .fab .icon {
   width: 28px;
   height: 28px;
+  fill: currentColor;
 }
 .fab:hover {
   box-shadow: 0 16px 24px rgba(0,0,0,0.5);
+  background-color: #2F7BFF; /* hover delta from #3A86FF */
 }
 .fab:active {
   transform: scale(0.98);
+  background-color: #2A73F0; /* active delta */
 }
 .fab:focus-visible {
   outline: 3px solid var(--focus-ring);
